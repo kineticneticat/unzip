@@ -10,9 +10,10 @@ except IndexError:
         except FileNotFoundError as err:
             raise FileNotFoundError
 filename = file.split('.')[0]
-filetype = file.split('.')[1]
+
 
 with open(file, 'rb') as inp:
     inp = pickle.load(inp)
     print(inp)
+    filetype = inp['filetype']
     open(f'{filename}.{filetype}', 'wb').write(inp['data'])
