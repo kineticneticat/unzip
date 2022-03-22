@@ -7,12 +7,12 @@ try:
 except IndexError:
         try:
             file = str(input('file:\n'))
-            inp = open(file, 'rb')
         except FileNotFoundError as err:
             raise FileNotFoundError
 filename = file.split('.')[0]
-print(inp.read())
-filetype = pickle.load(inp)['filetype']
-out = open(f'{filename}.{filetype}', 'wb')
+filetype = file.split('.')[1]
 
-out.write(pickle.loads(pickle.load(inp)['data']))
+with open(file, 'rb') as inp:
+    inp = pickle.load(inp)
+    print(inp)
+    open(f'{filename}.{filetype}', 'wb').write(inp['data'])
